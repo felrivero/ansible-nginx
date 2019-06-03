@@ -1,0 +1,3 @@
+CPU: {{ ansible_processor_cores }}
+MEMORY: {{ ansible_memtotal_mb }}MB
+DISK: {{ ansible_mounts[0].size_total / 1024 / 1024 / 1024 }}GB

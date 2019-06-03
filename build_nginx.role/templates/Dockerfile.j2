@@ -1,0 +1,15 @@
+FROM ubuntu:18.04
+
+ENV ROOTPASS {{root_pass}}
+
+RUN apt-get update 
+RUN apt-get install -y openssh-server  && \
+      rm -rf /var/lib/apt/lists/* && \
+      mkdir /var/run/sshd && \
+      echo "root:${ROOTPASS}" | chpasswd && \
+      sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+      sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+      sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd 
+
+EXPOSE 22 80 443
+CMD ["/usr/sbin/sshd", "-D"]

@@ -1,0 +1,27 @@
+- name: Clean know_hosts from old container info
+  shell: ssh-keygen -f "/root/.ssh/known_hosts" -R "[localhost]:2222"
+
+- name: Generate Dockerfile
+  template:
+    src: Dockerfile.j2
+    dest: /opt/Dockerfile
+
+- name: Install docker-py
+  pip:
+    name: docker-py
+
+- name: Build container
+  docker_image:
+    name: local-nginx
+    path: /opt
+    source: build
+    pull: yes
+
+- name: Run container
+  docker_container:
+    name: local-nginx
+    image: local-nginx
+    ports:
+      - "2222:22"
+      - "80:80"
+      - "443:443"
