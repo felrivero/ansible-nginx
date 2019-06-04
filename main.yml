@@ -3,7 +3,7 @@
   gather_facts: no
   tasks:
     - name: Setup python-pip
-      raw: apt update && apt install -y python-pip
+      raw: apt update && apt install -y sshpass python-pip
 
 - hosts: localhost
   roles:

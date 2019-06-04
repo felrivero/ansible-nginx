@@ -1,5 +1,4 @@
 [containers]
-#local-nginx ansible_connection=docker
 local-nginx ansible_port=2222 ansible_password=123123
 
 [containers:vars]
