@@ -1,6 +1,0 @@
----
-- hosts: local-nginx
-  tasks:
-  - name: Print
-    debug:
-      msg: '{{ ansible_mounts[0].size_total / 1024 / 1024 / 1024 }}'
