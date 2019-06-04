@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 ENV ROOTPASS {{root_pass}}
 
 RUN apt-get update 
-RUN apt-get install -y openssh-server  && \
+RUN apt-get install -y openssh-server python && \
       rm -rf /var/lib/apt/lists/* && \
       mkdir /var/run/sshd && \
       echo "root:${ROOTPASS}" | chpasswd && \

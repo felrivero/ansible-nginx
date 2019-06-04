@@ -6,16 +6,16 @@
     src: Dockerfile.j2
     dest: /opt/Dockerfile
 
-- name: Install docker-py
+- name: Setup python docker
   pip:
-    name: docker-py
+    name: docker
 
 - name: Build container
   docker_image:
     name: local-nginx
     path: /opt
-    source: build
-    pull: yes
+    #source: build
+    #pull: yes
 
 - name: Run container
   docker_container:
